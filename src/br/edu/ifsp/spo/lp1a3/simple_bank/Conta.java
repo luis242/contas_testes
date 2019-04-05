@@ -19,8 +19,20 @@ public class Conta {
 	}
 	
 	public Conta(String titular, String numeroConta) {
+		if (titular == null || titular.trim().isEmpty()) {
+			throw new TitularNullException("Titular não pode ser nulo ou vazio");
+		}
+		else {
+			
 		this.titular = titular;
-		this.numeroConta = numeroConta;
+		
+		if ((numeroConta == null || numeroConta.trim().isEmpty())) {
+			throw new NumeroContaException("Número da conta não pode ser nulo ou vazio");
+		}
+		else {
+			this.numeroConta = numeroConta;
+			}
+		}
 	}
 
 	public void depositar(double valor) { 
@@ -28,8 +40,13 @@ public class Conta {
 	}
 
 	public double retirar(double valor) {
-		this.saldo = this.saldo - valor;	
-		return valor;
+		if (this.saldo == 0) {
+			throw new SaldoZeroException("Saldo não pode ser 0");
+		}	
+		else {
+			this.saldo = this.getSaldo() - valor;
+			return this.getSaldo();
+		}
 	}
 
 	public void transferirPara(Conta contaDestino, double valorATransferir) {

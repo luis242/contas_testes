@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import br.edu.ifsp.spo.lp1a3.simple_bank.Conta;
+import br.edu.ifsp.spo.lp1a3.simple_bank.NumeroContaException;
+import br.edu.ifsp.spo.lp1a3.simple_bank.SaldoZeroException;
+import br.edu.ifsp.spo.lp1a3.simple_bank.TitularNullException;
 
 public class ContaTests {
 
@@ -81,6 +84,37 @@ public class ContaTests {
 		//3. Validação / Asserção
 		assertEquals(saldoEsperadoOrigem, contaOrigem.getSaldo());
 		assertEquals(saldoEsperadoDestino, contaDestino.getSaldo());
+	}
+	
+	@Test
+	public void titular_da_conta_null_ou_0() {
+		//1. Configuração
+		String nm = null;
+		String num = "123-456";
 		
+		//2. Execução
+		
+		//3. Validação / Asserção
+		try {
+			Conta conta = new Conta(nm, num);
+		}
+		catch (TitularNullException msg) {		
+		}
+	}
+	
+	@Test
+	public void numero_conta_null_ou_0() {
+		//1. Configuração
+		String nm = "José";
+		String num = null;
+		
+		//2. Execução
+		
+		//3. Validação / Asserção
+		try {
+			Conta conta = new Conta(nm, num);
+		}
+		catch (NumeroContaException msg) {		
+		}
 	}
 }

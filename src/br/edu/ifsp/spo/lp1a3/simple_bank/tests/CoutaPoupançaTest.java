@@ -10,12 +10,14 @@ import org.junit.jupiter.api.Test;
 
 import br.edu.ifsp.spo.lp1a3.simple_bank.Conta;
 import br.edu.ifsp.spo.lp1a3.simple_bank.ContaPoupança;
+import br.edu.ifsp.spo.lp1a3.simple_bank.RendimentoMenorZeroException;
 
 public class CoutaPoupançaTest {
 	
 	@Test
 	public void conta_pupanca_deve_ser_uma_conta() {
 		// 1. Configuração
+		
 		// 2. Execução
 		
 		// 3. Validação / Asserção
@@ -37,4 +39,20 @@ public class CoutaPoupançaTest {
 		assertEquals(valorADepositar + (valorADepositar * 0.01), conta.getSaldo());
 	}
 
+	@Test
+	public void taxa_rendimento_não_pode_ser_menor_que_0() {
+		// 1. Configuração
+		ContaPoupança conta = new ContaPoupança ("João da Silva", "123-456");
+		double taxaDeRendimento = -1;
+		
+		// 2. Execução
+				
+		// 3. Validação / Asserção
+		try {
+			conta.setTaxaRendimento(taxaDeRendimento);
+		}	
+		catch (RendimentoMenorZeroException msg){
+			
+		}
+	}
 }
